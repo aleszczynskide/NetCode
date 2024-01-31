@@ -25,29 +25,11 @@ public class InventoryManager : NetworkBehaviour
 
     public void SpawnItem(Sloy slot)
     {
-        if (IsServer)
-        {
-            GameObject newItem = Instantiate(gameItemPrefab, slot.transform);
-            Item inventoryItem = newItem.GetComponent<Item>();
-            inventoryItem.GetComponent<NetworkObject>().Spawn(true);
-            inventoryItem.ParentAfterDrag = slot.transform;
-            inventoryItem.transform.SetParent(slot.transform);
-        }
-        else
-        {
-            GameObject newItem = Instantiate(gameItemPrefab, slot.transform);
-            Item inventoryItem = newItem.GetComponent<Item>();
-            inventoryItem.GetComponent<NetworkObject>().Spawn(true);
-            inventoryItem.ParentAfterDrag = slot.transform;
-            inventoryItem.transform.SetParent(slot.transform);
-        }
-    }
-
-    [ClientRpc]
-    public void RpcSendToClientRpc(string message)
-    {
-        Debug.Log("Client received message: " + message);
-        AddItem();
+        GameObject newItem = Instantiate(gameItemPrefab, slot.transform);
+        Item inventoryItem = newItem.GetComponent<Item>();
+        inventoryItem.GetComponent<NetworkObject>().Spawn(true);
+        inventoryItem.ParentAfterDrag = slot.transform;
+        inventoryItem.transform.SetParent(slot.transform);
     }
 
     [ServerRpc(RequireOwnership = false)]
