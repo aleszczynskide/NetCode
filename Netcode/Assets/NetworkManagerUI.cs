@@ -26,14 +26,4 @@ public class NetworkManagerUI : MonoBehaviour
             NetworkManager.Singleton.StartClient();
         });
     }
-
-    public void SynchronizeItem()
-    {
-            RpcSendToServerRpc();
-    }
-    [ServerRpc(RequireOwnership = false)]
-    public void RpcSendToServerRpc()
-    {
-        Debug.Log("Synchronizacja kurwo");
-    }
 }
